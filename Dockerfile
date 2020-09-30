@@ -4,7 +4,7 @@ MAINTAINER Jia Yiqiu <yiqiujia@hotmail.com>
 
 ENV GROUP=openwrt \
 	KEY=1234567 \
-	IP=192.168.11.20 \
+	IP=192.168.11.110 \
 	MASK=255.255.255.0 \
 	CONNECT=127.0.0.1:30151
 
