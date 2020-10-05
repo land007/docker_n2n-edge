@@ -8,7 +8,7 @@ ENV GROUP=openwrt \
 	MASK=255.255.255.0 \
 	CONNECT=127.0.0.1:30151
 
-RUN ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa \
+RUN ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && \
 	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
 
 RUN echo $(date "+%Y-%m-%d_%H:%M:%S") >> /.image_times && \
