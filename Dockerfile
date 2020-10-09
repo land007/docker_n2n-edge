@@ -14,7 +14,8 @@ RUN ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && \
 RUN echo $(date "+%Y-%m-%d_%H:%M:%S") >> /.image_times && \
 	echo $(date "+%Y-%m-%d_%H:%M:%S") > /.image_time && \
 	echo "land007/n2n-edge" >> /.image_names && \
-	echo "land007/n2n-edge" > /.image_name
+	echo "land007/n2n-edge" > /.image_name && \
+	sed -i 's/#Port 20022/Port 22222/g' /etc/ssh/sshd_config
 
 RUN echo 'edge -d n2n -c ${GROUP} -k ${KEY} -a ${IP} -l ${CONNECT} -r -b -v -f' >> /start.sh
 
