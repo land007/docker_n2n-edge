@@ -8,14 +8,17 @@ ENV GROUP=openwrt \
 	MASK=255.255.255.0 \
 	CONNECT=127.0.0.1:30151
 
-RUN ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && \
-	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+#RUN ssh-keygen -t rsa -N '' -f ~/.ssh/id_rsa && \
+#	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+ADD ssh /root/.ssh
+RUN chmod 700 /root/.ssh && \
+	chmod 600 ~/.ssh/authorized_keys && \
+	sed -i 's/#Port 20022/Port 22222/g' /etc/ssh/sshd_config
 
 RUN echo $(date "+%Y-%m-%d_%H:%M:%S") >> /.image_times && \
 	echo $(date "+%Y-%m-%d_%H:%M:%S") > /.image_time && \
 	echo "land007/n2n-edge" >> /.image_names && \
-	echo "land007/n2n-edge" > /.image_name && \
-	sed -i 's/#Port 20022/Port 22222/g' /etc/ssh/sshd_config
+	echo "land007/n2n-edge" > /.image_name
 
 RUN echo 'edge -d n2n -c ${GROUP} -k ${KEY} -a ${IP} -l ${CONNECT} -r -b -v -f' >> /start.sh
 
